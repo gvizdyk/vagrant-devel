@@ -1,0 +1,10 @@
+---
+- block:
+     - include: user.yml
+       become: yes
+       become_user: "{{ user_name }}"
+  when: ansible_ssh_user != user_name
+
+- block:
+     - include: user.yml
+  when: ansible_ssh_user == user_name

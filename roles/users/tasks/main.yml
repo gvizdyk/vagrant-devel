@@ -1,0 +1,40 @@
+---
+- name: Creating groups
+  group: name="{{item}}"
+  with_items: groups_to_create
+  tags: ['users','groups','configuration']
+
+- name: Per-user group creation
+  group: name="{{users.username}}" gid="{{users.uid}}"
+  when: users_create_per_user_group
+  tags: ['users','configuration']
+
+- name: User creation
+  user:
+      name: "{{users.username}}"
+      group: "{{users.username if users_create_per_user_group else users_group}}"
+      groups: "{{users.groups}}"
+      shell: "{{users.shell if users.shell is defined else users_default_shell}}"
+      password: "{{users.password if users.password is defined else '!'}}"
+      comment: "{{users.name}}"
+      uid: "{{users.uid}}"
+      createhome: "{{'yes' if users_create_homedirs else 'no'}}"
+  tags: ['users','configuration']
+
+  #- name: SSH keys
+  # authorized_key: user="{{users.0.username}}" key="{{users.1}}"
+  # with_subelements:
+  #   - users
+  #  - ssh_key
+  # tags: ['users','configuration']
+
+  #- name: Deleted user removal
+  #  user: name="{{item.username}}" 
+  # with_items: users_deleted
+  # tags: ['users','configuration']
+
+  #- name: Deleted per-user group removal
+  # group: name="{{item.username}}"
+  # with_items: users_deleted
+  # when: users_create_per_user_group
+  # tags: ['users','configuration']

@@ -1,0 +1,29 @@
+---
+- name: Clone buildout files
+  git:
+    repo: '{{ op.buildout_repository_path }}'
+    dest: /home/{{ user_name }}/{{ op.buildout_path }}
+    version: '{{ op.buildout_repository_version }}'
+
+# - name: Clone buildout files
+#   git:
+#     repo= 'https://github.com/openprocurement/openprocurement.auction.buildout.git'
+#     dest=/home/{{ user_name }}/{{ op.buildout_path }}
+#     version= {{ op.buildout_repository_version }}
+
+# - name: Put buildout.cfg
+#   command: cp /home/{{ user_name }}/{{ op.buildout_path }}/buildout.cfg{.example,}
+
+- name: Run Bootstarp
+  shell:
+    python bootstrap.py
+    chdir=/home/{{ user_name }}/{{ op.buildout_path }}
+
+# - name: Run Buildout
+#   shell: bin/buildout
+#     chdir=/home/{{ user_name }}/{{ op.buildout_path }}
+
+# - name: Circusd start
+#   shell:
+#     bin/circusd --daemon
+#     chdir=/home/{{ user_name }}/{{ op.buildout_path }}

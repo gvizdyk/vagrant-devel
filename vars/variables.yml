@@ -1,0 +1,13 @@
+---
+server_name: dwarf
+user_name: gvizdyk
+users:
+    username: gvizdyk
+    name: gvizdyk
+    groups: users
+    uid: 1111
+
+op:
+  buildout_repository_path: https://github.com/openprocurement/openprocurement.auction.buildout.git
+  buildout_repository_version: esco
+  buildout_path: esco-buildout

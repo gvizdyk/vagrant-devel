@@ -1,0 +1,12 @@
+---
+- block:
+    - name: Install python-dnf and selinux binding
+      shell: dnf install python python-dnf libselinux-python -y
+
+    - name: Allow 'vagrant' user to have passwordless sudo
+      lineinfile:
+         dest: /etc/sudoers.d/vagrant-nopasswd
+         state: present
+         regexp: '^%vagrant'
+         line: '%vagrant ALL=(ALL) NOPASSWD: ALL'
+  become: yes
