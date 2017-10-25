@@ -48,8 +48,8 @@
      - tmux
      - zeromq3-devel
 
-  - name: Install bower
-    command: npm install -g bower
+  # - name: Install bower
+  #   command: npm install -g bower
 
-  - name: Install bower
-    command: npm install -g gulp
+  # - name: Install bower
+  #   command: npm install -g gulp
