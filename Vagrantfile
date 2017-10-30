@@ -45,7 +45,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider "virtualbox" do |vb|
     # Display the VirtualBox GUI when booting the machine
-    vb.gui = true
+    # vb.gui = true
 
     # Customize the amount of memory on the VM:
     vb.memory = "1024"
@@ -66,6 +66,10 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     sudo dnf install -y python
+    sudo dnf install -y https://openresty.org/package/fedora/25/x86_64/openresty-zlib-1.2.11-3.fc25.x86_64.rpm
+    sudo dnf install -y https://openresty.org/package/fedora/25/x86_64/openresty-openssl-1.0.2k-1.fc25.x86_64.rpm
+    sudo dnf install -y https://openresty.org/package/fedora/25/x86_64/openresty-pcre-8.40-1.fc25.x86_64.rpm
+    sudo dnf install -y https://openresty.org/package/fedora/25/x86_64/openresty-1.11.2.5-2.fc25.x86_64.rpm
   SHELL
 
   config.vm.provision :ansible do |ansible|
